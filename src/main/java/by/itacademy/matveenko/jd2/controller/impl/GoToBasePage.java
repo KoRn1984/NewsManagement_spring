@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import by.itacademy.matveenko.jd2.bean.News;
 import by.itacademy.matveenko.jd2.service.INewsService;
@@ -20,27 +25,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class GoToBasePage implements Command{	
-	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
-	private static final Logger log = LogManager.getLogger(GoToBasePage.class);
+@Controller
+@RequestMapping("/controller?command=go_to_base_page")
+public class GoToBasePage {	
+	
+	private INewsService newsService;
+	
+	@Autowired
+    public void setNewsService(INewsService newsService) {
+        this.newsService = newsService;
+    }
+	
+	//private static final Logger log = LogManager.getLogger(GoToBasePage.class);
 	private static final int COUNT_NEWS = 5;
 
-	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession getSession = request.getSession(true);
+	@Transactional
+	@RequestMapping("/")
+	public String basePage(Model theModel, HttpSession session) {
+		//HttpSession getSession = request.getSession(true);
 		List<News> latestNews;
 				
 		try {			
 			latestNews = newsService.latestList(COUNT_NEWS);			
-			request.setAttribute(AttributsName.NEWS, latestNews);
-			getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
-		} catch (ServiceException e) {			
-			log.error(e);
-			response.sendRedirect(JspPageName.ERROR_PAGE);
+			session.setAttribute(AttributsName.NEWS, latestNews);
+			session.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
 		} finally {
-			request.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.NOT_ACTIVE);
-			getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
-			request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
+			session.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.NOT_ACTIVE);
+			session.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
+			//session.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
 		}
-	}
+		return "/index.jsp";
 }
+	}

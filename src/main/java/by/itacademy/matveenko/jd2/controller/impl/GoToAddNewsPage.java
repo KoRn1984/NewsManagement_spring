@@ -2,12 +2,13 @@ package by.itacademy.matveenko.jd2.controller.impl;
 
 import java.io.IOException;
 
+import by.itacademy.matveenko.jd2.bean.UserRole;
 import by.itacademy.matveenko.jd2.controller.Command;
 import by.itacademy.matveenko.jd2.util.AttributsName;
 import by.itacademy.matveenko.jd2.util.ConnectorStatus;
 import by.itacademy.matveenko.jd2.util.JspPageName;
 import by.itacademy.matveenko.jd2.util.PageUrl;
-import by.itacademy.matveenko.jd2.util.UserRole;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

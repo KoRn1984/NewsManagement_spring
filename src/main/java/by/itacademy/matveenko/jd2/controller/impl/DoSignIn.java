@@ -10,6 +10,7 @@ import by.itacademy.matveenko.jd2.service.INewsService;
 import by.itacademy.matveenko.jd2.service.IUserService;
 import by.itacademy.matveenko.jd2.bean.News;
 import by.itacademy.matveenko.jd2.bean.User;
+import by.itacademy.matveenko.jd2.bean.UserRole;
 import by.itacademy.matveenko.jd2.controller.Command;
 import by.itacademy.matveenko.jd2.service.ServiceException;
 import by.itacademy.matveenko.jd2.service.ServiceProvider;
@@ -18,7 +19,7 @@ import by.itacademy.matveenko.jd2.util.ConnectorStatus;
 import by.itacademy.matveenko.jd2.util.JspPageName;
 import by.itacademy.matveenko.jd2.util.PageUrl;
 import by.itacademy.matveenko.jd2.util.UserParameterName;
-import by.itacademy.matveenko.jd2.util.UserRole;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -7,9 +7,9 @@ import by.itacademy.matveenko.jd2.bean.News;
 public interface INewsDao {
 	List<News> getLatestList(int pageSize);
 	List<News> getNewsList(Integer pageNumber, Integer pageSize);
-	News fetchById(Integer idNews) throws NewsDaoException;
-	int addNews(News news) throws NewsDaoException;
-	boolean updateNews(News news) throws NewsDaoException;
+	News fetchById(Integer idNews);
+	boolean addNews(News news);
+	boolean updateNews(News news);
 	boolean unpublishNews(String[] idNews) throws NewsDaoException;
 	boolean deleteNews(String[] idNews) throws NewsDaoException;
 	int countNews() throws NewsDaoException;	
