@@ -143,10 +143,10 @@ public class NewsDao implements INewsDao {
         return true;
 	}
 	
-	@Override
-	public int countNews() {
+	//@Override
+	//public int countNews() {
 		
-	}
+	//}
 
 	private static final String SELECT_COUNT_NEWS = "SELECT COUNT(*) FROM news WHERE published = ?";
 	@Override

@@ -15,6 +15,7 @@ import by.itacademy.matveenko.jd2.util.validation.NewsDataValidation;
 
 @Service
 public class NewsServiceImpl implements INewsService{
+	private static final int COUNT_NEWS = 5;
 	private static final String NEWS_PUBLISHED = "yes";
 	private static final String NEWS_UNPUBLISHED = "no";
 	
@@ -24,7 +25,7 @@ public class NewsServiceImpl implements INewsService{
 	@Override
 	@Transactional
 	public List<News> latestList(int count) {		
-		return newsDao.getLatestList(5);
+		return newsDao.getLatestList(COUNT_NEWS);
 	}
 
 	@Override

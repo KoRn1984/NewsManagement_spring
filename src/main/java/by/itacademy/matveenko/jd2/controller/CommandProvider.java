@@ -12,7 +12,7 @@ import by.itacademy.matveenko.jd2.controller.impl.DoSignIn;
 import by.itacademy.matveenko.jd2.controller.impl.DoSignOut;
 import by.itacademy.matveenko.jd2.controller.impl.DoUnpublishNews;
 import by.itacademy.matveenko.jd2.controller.impl.GoToAddNewsPage;
-import by.itacademy.matveenko.jd2.controller.impl.GoToBasePage;
+//import by.itacademy.matveenko.jd2.controller.impl.GoToBasePage;
 import by.itacademy.matveenko.jd2.controller.impl.GoToEditNewsPage;
 import by.itacademy.matveenko.jd2.controller.impl.GoToNewsList;
 import by.itacademy.matveenko.jd2.controller.impl.GoToViewNews;
@@ -23,7 +23,7 @@ public class CommandProvider {
 	private Map<CommandName, Command> commands = new HashMap<>();
 	
 	public CommandProvider() {
-		commands.put(CommandName.GO_TO_BASE_PAGE, new GoToBasePage());
+		//commands.put(CommandName.GO_TO_BASE_PAGE, new GoToBasePage());
 		commands.put(CommandName.GO_TO_VIEW_NEWS, new GoToViewNews());
 		commands.put(CommandName.GO_TO_NEWS_LIST, new GoToNewsList());		
 		commands.put(CommandName.GO_TO_REGISTRATION_PAGE, new GoToRegistrationPageCommand());

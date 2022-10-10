@@ -24,41 +24,36 @@ import javax.servlet.http.HttpSession;
 
 public class GoToEditNewsPage implements Command {
 	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
-	private static final Logger log = LogManager.getLogger(GoToEditNewsPage.class);
+	//private static final Logger log = LogManager.getLogger(GoToEditNewsPage.class);
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		News news = null;
 		
-		try {
-			HttpSession getSession = request.getSession(false);
-			if (getSession == null) {
-				response.sendRedirect(JspPageName.INDEX_PAGE);
-				} else {
-					String role = (String) getSession.getAttribute(AttributsName.ROLE);
-					if (!role.equals(UserRole.ADMIN.getName())) {
-						response.sendRedirect(JspPageName.ERROR_PAGE);
-						} else {
-							String id = request.getParameter(NewsParameterName.JSP_ID_NEWS);
-							news = newsService.findById(Integer.parseInt(id));
-							if (news == null) {
-								response.sendRedirect(JspPageName.ERROR_PAGE);
-								} else {
-									request.setAttribute(AttributsName.NEWS, news);
-									getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);
-									getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.EDIT_NEWS);
-									getSession.setAttribute(AttributsName.NEWS_ID, request.getParameter(NewsParameterName.JSP_ID_NEWS));
-									StringBuilder urlForRedirect = new StringBuilder(PageUrl.EDIT_NEWS_PAGE);
-									urlForRedirect.append(id);
-									getSession.setAttribute(AttributsName.PAGE_URL, urlForRedirect.toString());
-									request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
-									getSession.removeAttribute(AttributsName.NEWS_COMMANDS_NAME);
-									}
-							}
-					}
-			} catch (ServiceException e) {
-				log.error(e);
-				response.sendRedirect(JspPageName.ERROR_PAGE);
+		HttpSession getSession = request.getSession(false);
+		if (getSession == null) {
+			response.sendRedirect(JspPageName.INDEX_PAGE);
+			} else {
+				String role = (String) getSession.getAttribute(AttributsName.ROLE);
+				if (!role.equals(UserRole.ADMIN.getName())) {
+					response.sendRedirect(JspPageName.ERROR_PAGE);
+					} else {
+						String id = request.getParameter(NewsParameterName.JSP_ID_NEWS);
+						news = newsService.findById(Integer.parseInt(id));
+						if (news == null) {
+							response.sendRedirect(JspPageName.ERROR_PAGE);
+							} else {
+								request.setAttribute(AttributsName.NEWS, news);
+								getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);
+								getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.EDIT_NEWS);
+								getSession.setAttribute(AttributsName.NEWS_ID, request.getParameter(NewsParameterName.JSP_ID_NEWS));
+								StringBuilder urlForRedirect = new StringBuilder(PageUrl.EDIT_NEWS_PAGE);
+								urlForRedirect.append(id);
+								getSession.setAttribute(AttributsName.PAGE_URL, urlForRedirect.toString());
+								request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
+								getSession.removeAttribute(AttributsName.NEWS_COMMANDS_NAME);
+								}
+						}
 				}
 		}
 }
